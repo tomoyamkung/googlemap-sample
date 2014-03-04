@@ -1,7 +1,22 @@
+var latitude; // 計算した緯度を表示する span タグ
+var longitude; // 計算した経度を表示する span タグ
+var failure; // 該当する緯度・経度が見つからなかった場合に表示する span タグ
+
 $(function() {
-	var address = "東京都墨田区押上１−１−２";
-	new google.maps.Geocoder().geocode({'address': address}, callbackRender);
-		// Geocoder.geocode 関数に住所とコールバック関数を渡す
+	latitude = $('#latitude');
+	longitude = $('#longitude');
+	failure = $('#failure');
+	var geocoder = new google.maps.Geocoder();
+
+	// 初期表示
+	var address = $('#address').val();
+	geocoder.geocode({'address': address}, callbackRender);
+
+	// 住所が入力された場合の対応
+	$('#address').change(function(event) {
+		address = $(this).val();
+		geocoder.geocode({'address': address}, callbackRender);
+	});
 });
 
 /**
@@ -15,6 +30,10 @@ $(function() {
  */
 function callbackRender(results, status) {
 	if(status == google.maps.GeocoderStatus.OK) {
+		latitude.text(results[0].geometry.location.d);
+		longitude.text(results[0].geometry.location.e);
+		failure.text('');
+
 		var options = {
 			zoom: 18,
 			center: results[0].geometry.location, // 指定の住所から計算した緯度経度を指定する
@@ -26,6 +45,10 @@ function callbackRender(results, status) {
 			// 指定の住所から計算した緯度経度の位置に Marker を立てる
 
 		adjustMapSize();
+	} else {
+		latitude.text('');
+		longitude.text('');
+		failure.text('指定した住所に該当する緯度・経度は見つかりませんでした。');
 	}
 }
 

@@ -3,11 +3,17 @@
 	<head>
 		<meta charset=utf8>
 		<title>Google Map サンプル</title>
-		<meta name="description" content="JavaScript 内で指定した場所を GoogleMap で表示するだけの簡単なプログラムです。" >
+		<meta name="description" content="入力欄で指定した住所から緯度・経度と GoogleMap で表示するだけの簡単なプログラムです。" >
 
 		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 	</head>
 	<body>
+		<div id="field">
+			<input type="text" id="address" size="70" value="東京都墨田区押上１−１−２" />
+			<span>
+				緯度:<span id="latitude" ></span>&nbsp;&nbsp;経度:<span id="longitude" ></span>&nbsp;&nbsp;<span id="failure"></span>
+			</span>
+		</div>
 		<div id="map-canvas"></div>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
