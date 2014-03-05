@@ -1,11 +1,4 @@
-var latitude; // 計算した緯度を表示する span タグ
-var longitude; // 計算した経度を表示する span タグ
-var failure; // 該当する緯度・経度が見つからなかった場合に表示する span タグ
-
 $(function() {
-	latitude = $('#latitude');
-	longitude = $('#longitude');
-	failure = $('#failure');
 	var geocoder = new google.maps.Geocoder();
 
 	// 初期表示
@@ -30,10 +23,6 @@ $(function() {
  */
 function callbackRender(results, status) {
 	if(status == google.maps.GeocoderStatus.OK) {
-		latitude.text(results[0].geometry.location.d);
-		longitude.text(results[0].geometry.location.e);
-		failure.text('');
-
 		var options = {
 			zoom: 18,
 			center: results[0].geometry.location, // 指定の住所から計算した緯度経度を指定する
@@ -41,15 +30,49 @@ function callbackRender(results, status) {
 		};
 		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
 			// #map-canvas に GoogleMap を出力する
-		new google.maps.Marker({map: gmap, position: results[0].geometry.location});
+		var marker = new google.maps.Marker({map: gmap, position: results[0].geometry.location});
 			// 指定の住所から計算した緯度経度の位置に Marker を立てる
 
+		var infoWindow = createInfoWindow(results); // InfoWindow オブジェクトを生成し、
+		infoWindow.open(marker.getMap(), marker); // 初期表示で InfoWindow を表示する
+		google.maps.event.addListener(marker, 'click', function(event) {
+ 			infoWindow.open(marker.getMap(), marker);
+ 				// Marker をクリックしても InfoWindow を表示する
+		});
+
 		adjustMapSize();
-	} else {
-		latitude.text('');
-		longitude.text('');
-		failure.text('指定した住所に該当する緯度・経度は見つかりませんでした。');
 	}
+}
+
+/**
+ * InfoWindow オブジェクトを生成する。
+ * 
+ * @param result ジオコーダの実行結果
+ * 
+ */
+function createInfoWindow(result) {
+	var infoWindow = new google.maps.InfoWindow({
+		content: createTag(result),
+		maxWidth: 500,
+		maxHeight: 500
+	});
+	return infoWindow;
+}
+
+/**
+ * InfoWindow 内に設定する HTML を生成する。
+ *
+ * HTML の生成は Underscore.js を使い、テンプレートは index.html 内に定義してある。
+ *
+ * @param result ジオコーダの実行結果
+ * 
+ */
+function createTag(result) {
+	var latitude = result[0].geometry.location.d; // 緯度
+	var longitude = result[0].geometry.location.e; // 経度
+	var template = _.template($('#infowindow_template').text());
+	var tag = template({latitude: latitude, longitude: longitude});
+	return tag;
 }
 
 /**
