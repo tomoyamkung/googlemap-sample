@@ -52,9 +52,8 @@ function callbackRender(results, status) {
  */
 function createInfoWindow(result) {
 	var infoWindow = new google.maps.InfoWindow({
-		content: createTag(result),
-		maxWidth: 500,
-		maxHeight: 500
+		content: createTag(result), // InfoWindow に表示するコンテンツ
+		maxWidth: 500
 	});
 	return infoWindow;
 }
