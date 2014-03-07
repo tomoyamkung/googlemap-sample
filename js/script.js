@@ -36,8 +36,8 @@ function callbackRender(results, status) {
 		var infoWindow = createInfoWindow(results); // InfoWindow オブジェクトを生成し、
 		infoWindow.open(marker.getMap(), marker); // 初期表示で InfoWindow を表示する
 		google.maps.event.addListener(marker, 'click', function(event) {
- 			infoWindow.open(marker.getMap(), marker);
- 				// Marker をクリックしても InfoWindow を表示する
+			infoWindow.open(marker.getMap(), marker);
+				// Marker をクリックしても InfoWindow を表示する
 		});
 
 		adjustMapSize();
@@ -53,7 +53,7 @@ function callbackRender(results, status) {
 function createInfoWindow(result) {
 	var infoWindow = new google.maps.InfoWindow({
 		content: createTag(result), // InfoWindow に表示するコンテンツ
-		maxWidth: 500
+		// maxWidth: 1000 // width は CSS で制御するようにしたのでコメントアウト
 	});
 	return infoWindow;
 }
@@ -75,11 +75,12 @@ function createTag(result) {
 }
 
 /**
- * GoogleMap を表示する部分のサイズを調整する。
+ * GoogleMap を表示する div タグのサイズを調整する。
  * 
  */
 function adjustMapSize() {
+	var padding = $('#header-hollow').height(); // 住所入力欄の height を取得
+
 	var mapCanvas = $('#map-canvas');
-	var marginBottom = 5; // CSS に定義してある margin の値
-	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top - marginBottom) + "px");
+	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top) - padding + "px");
 }

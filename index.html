@@ -3,27 +3,47 @@
 	<head>
 		<meta charset=utf8>
 		<title>Google Map サンプル</title>
-		<meta name="description" content="入力欄で指定した住所から緯度・経度と GoogleMap で表示するだけの簡単なプログラムです。" >
+		<meta name="description" content="入力した住所から緯度・経度を GoogleMap の InfoWindow に表示するだけの簡単なプログラムです。">
+
+		<!-- CSS -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
 		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 	</head>
 	<body>
-		<div id="field">
-			<input type="text" id="address" size="70" value="東京都墨田区押上１−１−２" />
-		</div>
-		<div id="map-canvas"></div>
+		<div class="container">
+			<div id="header-hollow" class="row">
+				<div class="col-md-5">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-map-marker"></span>
+						</span>
+						<input type="text" id="address" class="form-control" value="東京都墨田区押上１−１−２" />
+					</div>
+				</div>
+			</div><!-- /#header-hollow -->
+
+			<div class="row">
+				<div class="well well-sm">
+					<div id="map-canvas"></div>
+				</div>
+			</div>
+		</div><!-- /.container -->
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 		<script type="text/javascript" src="./js/script.js" charset="utf8"></script>
 		<script type="text/template" id="infowindow_template">
-			<div>
-				<div>
-					<span>緯度:<%= latitude %></span>
+			<div class="well info-window">
+				<div class="row">
+					<span>緯度:&nbsp;<%= latitude %></span>
 				</div>
-				<div>
-					<span>経度:<%= longitude %></span>
+				<div class="row">
+					<span>経度:&nbsp;<%= longitude %></span>
 				</div>
 			</div>
 		</script>
