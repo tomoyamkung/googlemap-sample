@@ -52,7 +52,7 @@ function callbackRender(results, status) {
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
 
-	var infoWindow = createInfoWindow(location.d, location.e); // InfoWindow オブジェクトを生成し、、、
+	var infoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
 	infoWindow.open(marker.getMap(), marker); // InfoWindow を表示する
 }
 
