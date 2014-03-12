@@ -45,3 +45,10 @@
 .amazon-book {
 	margin: 10px 15px;
 }
+
+footer {
+	text-align: center;
+	padding: 25px 0;
+	margin-top: 10px;
+	background-color: #dcdcdc;
+}
