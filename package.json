@@ -1,0 +1,9 @@
+{
+	"name": "grunt-work",
+	"version": "0.1.0",
+	"devDependencies": {
+		"grunt": "0.4.3",
+		"grunt-contrib-connect": "*",
+		"grunt-contrib-watch": "*"
+	}
+}
