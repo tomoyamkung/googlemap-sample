@@ -2,6 +2,7 @@
  * 表示中の InfoWindow オブジェクト。
  */
 var currentInfoWindow;
+var stock = new InfoWindowStock();
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
@@ -102,3 +103,19 @@ function adjustMapSize() {
 	var mapCanvas = $('#map-canvas');
 	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top) - padding + "px");
 }
+
+var InfoWindowStock = function() {
+	this.stock = [];
+};
+InfoWindowStock.prototype.createKey = function(location) {
+	var key = location.k + ":" + location.A;
+	return key;
+};
+InfoWindowStock.prototype.put = function(location, infoWindow) {
+	var key = this.createKey(location);
+	this.stock[key] = infoWindow;
+};
+InfoWindowStock.prototype.get = function(location) {
+	var key = this.createKey(location);
+	return this.stock[key];
+};
