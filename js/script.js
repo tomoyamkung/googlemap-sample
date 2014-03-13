@@ -1,3 +1,8 @@
+/**
+ * 表示中の InfoWindow オブジェクト。
+ */
+var currentInfoWindow;
+
 $(function() {
 	var geocoder = new google.maps.Geocoder();
 
@@ -52,8 +57,8 @@ function callbackRender(results, status) {
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
 
-	var infoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
-	infoWindow.open(marker.getMap(), marker); // InfoWindow を表示する
+	currentInfoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
+	currentInfoWindow.open(marker.getMap(), marker); // InfoWindow を表示する
 }
 
 
