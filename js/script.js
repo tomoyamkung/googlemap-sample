@@ -13,6 +13,11 @@ InfoWindowStock.prototype = {
 	get: function(location) {
 		var key = this.createKey(location);
 		return this.stock[key];
+	},
+	dump: function() {
+		if(this.stock) {
+			console.log(Object.keys(this.stock).length);
+		}
 	}
 };
 
@@ -76,14 +81,17 @@ function callbackRender(results, status) {
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
 
-	this.disableCurrentInfoWindow();
+	this.disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にする
 
 	currentInfoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
-	currentInfoWindow.open(marker.getMap(), marker); // InfoWindow を表示する
+	currentInfoWindow.open(marker.getMap(), marker); // InfoWindow を表示し、、、
+	stock.put(location, currentInfoWindow); // stock に追加する
 
-	// google.maps.event.addListener(marker, 'click', function(event) {
-	// 	console.log(event);
-	// });
+	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
+		disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にし、、、
+		currentInfoWindow = stock.get(event.latLng); // stock から InfoWindow を取り出して、、、
+		currentInfoWindow.open(marker.getMap(), marker); // Marker に InfoWindow を表示する
+	});
 }
 
 /**
