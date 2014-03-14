@@ -1,3 +1,21 @@
+var InfoWindowStock = function() {
+	this.stock = [];
+};
+InfoWindowStock.prototype = {
+	createKey: function(location) {
+		var key = location.k + ":" + location.A;
+		return key;
+	},
+	put: function(location, infoWindow) {
+		var key = this.createKey(location);
+		this.stock[key] = infoWindow;
+	},
+	get: function(location) {
+		var key = this.createKey(location);
+		return this.stock[key];
+	}
+};
+
 /**
  * 表示中の InfoWindow オブジェクト。
  */
@@ -58,10 +76,25 @@ function callbackRender(results, status) {
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
 
+	this.disableCurrentInfoWindow();
+
 	currentInfoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
 	currentInfoWindow.open(marker.getMap(), marker); // InfoWindow を表示する
+
+	// google.maps.event.addListener(marker, 'click', function(event) {
+	// 	console.log(event);
+	// });
 }
 
+/**
+ * 表示中の InfoWindow があれば非表示にする。
+ * 
+ */
+function disableCurrentInfoWindow () {
+	if(this.currentInfoWindow) {
+		this.currentInfoWindow.close();
+	}
+}
 
 /**
  * InfoWindow オブジェクトを生成する。
@@ -104,18 +137,3 @@ function adjustMapSize() {
 	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top) - padding + "px");
 }
 
-var InfoWindowStock = function() {
-	this.stock = [];
-};
-InfoWindowStock.prototype.createKey = function(location) {
-	var key = location.k + ":" + location.A;
-	return key;
-};
-InfoWindowStock.prototype.put = function(location, infoWindow) {
-	var key = this.createKey(location);
-	this.stock[key] = infoWindow;
-};
-InfoWindowStock.prototype.get = function(location) {
-	var key = this.createKey(location);
-	return this.stock[key];
-};
