@@ -1,30 +1,13 @@
-var InfoWindowStock = function() {
-	this.stock = [];
-};
-InfoWindowStock.prototype = {
-	createKey: function(location) {
-		var key = location.k + ":" + location.A;
-		return key;
-	},
-	put: function(location, infoWindow) {
-		var key = this.createKey(location);
-		this.stock[key] = infoWindow;
-	},
-	get: function(location) {
-		var key = this.createKey(location);
-		return this.stock[key];
-	},
-	dump: function() {
-		if(this.stock) {
-			console.log(Object.keys(this.stock).length);
-		}
-	}
-};
-
 /**
  * 表示中の InfoWindow オブジェクト。
+ * 
  */
 var currentInfoWindow;
+
+/**
+ * 生成した InfoWindow をストックする。
+ * 
+ */
 var stock = new InfoWindowStock();
 
 $(function() {
