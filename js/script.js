@@ -1,3 +1,15 @@
+/**
+ * 表示中の InfoWindow オブジェクト。
+ * 
+ */
+var currentInfoWindow;
+
+/**
+ * 生成した InfoWindow をストックする。
+ * 
+ */
+var stock = new InfoWindowStock();
+
 $(function() {
 	var geocoder = new google.maps.Geocoder();
 
@@ -30,14 +42,13 @@ function callbackRender(results, status) {
 		};
 		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
 			// #map-canvas に GoogleMap を出力する
-		var marker = new google.maps.Marker({map: gmap, position: results[0].geometry.location});
-			// 指定の住所から計算した緯度経度の位置に Marker を立てる
 
-		var infoWindow = createInfoWindow(results); // InfoWindow オブジェクトを生成し、
-		infoWindow.open(marker.getMap(), marker); // 初期表示で InfoWindow を表示する
-		google.maps.event.addListener(marker, 'click', function(event) {
-			infoWindow.open(marker.getMap(), marker);
-				// Marker をクリックしても InfoWindow を表示する
+		setupMarker(gmap, results[0].geometry.location);
+			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
+		google.maps.event.addListener(gmap, 'click', function(event) {
+			// GoogleMap 上で左クリックがあったら、、、
+			setupMarker(gmap, event.latLng);
+				// その場所に Marker を立てる
 		});
 
 		adjustMapSize();
@@ -45,14 +56,47 @@ function callbackRender(results, status) {
 }
 
 /**
- * InfoWindow オブジェクトを生成する。
+ * 指定の場所に InfoWindow を設定した Marker を表示する。
  * 
- * @param result ジオコーダの実行結果
+ * @param  {Object} map Marker を立てる GoogleMap オブジェクト
+ * @param  {Object} location Marker を立てる位置
+ */
+function setupMarker(map, location) {
+	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
+
+	this.disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にする
+
+	currentInfoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
+	currentInfoWindow.open(marker.getMap(), marker); // InfoWindow を表示し、、、
+	stock.put(location, currentInfoWindow); // stock に追加する
+
+	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
+		disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にし、、、
+		currentInfoWindow = stock.get(event.latLng); // stock から InfoWindow を取り出して、、、
+		currentInfoWindow.open(marker.getMap(), marker); // Marker に InfoWindow を表示する
+	});
+}
+
+/**
+ * 表示中の InfoWindow があれば非表示にする。
  * 
  */
-function createInfoWindow(result) {
+function disableCurrentInfoWindow () {
+	if(this.currentInfoWindow) {
+		this.currentInfoWindow.close();
+	}
+}
+
+/**
+ * InfoWindow オブジェクトを生成する。
+ * 
+ * @param  {Number} latitude 緯度
+ * @param  {Number} longitude 経度
+ * @return {Object} InfoWindow オブジェクト
+ */
+function createInfoWindow(latitude, longitude) {
 	var infoWindow = new google.maps.InfoWindow({
-		content: createTag(result), // InfoWindow に表示するコンテンツ
+		content: createTag(latitude, longitude), // InfoWindow に表示するコンテンツ
 		// maxWidth: 1000 // width は CSS で制御するようにしたのでコメントアウト
 	});
 	return infoWindow;
@@ -62,13 +106,12 @@ function createInfoWindow(result) {
  * InfoWindow 内に設定する HTML を生成する。
  *
  * HTML の生成は Underscore.js を使い、テンプレートは index.html 内に定義してある。
- *
- * @param result ジオコーダの実行結果
  * 
+ * @param  {Number} latitude 緯度
+ * @param  {Number} longitude 経度
+ * @return {Object} InfoWindow に設定するタグ
  */
-function createTag(result) {
-	var latitude = result[0].geometry.location.d; // 緯度
-	var longitude = result[0].geometry.location.e; // 経度
+function createTag(latitude, longitude) {
 	var template = _.template($('#infowindow_template').text());
 	var tag = template({latitude: latitude, longitude: longitude});
 	return tag;
@@ -84,3 +127,4 @@ function adjustMapSize() {
 	var mapCanvas = $('#map-canvas');
 	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top) - padding + "px");
 }
+

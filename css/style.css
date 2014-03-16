@@ -13,3 +13,42 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+
+#main {
+	width: 820px;
+}
+
+#right-side {
+	width: 334px;
+	/*background-color: #dcdcdc;*/
+}
+
+.label-ad {
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	background-color: #dcdcdc;
+}
+
+.label-ad span {
+	font-weight: bold;
+}
+
+.adsense {
+	width: 304px;
+	height: 254px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	padding: 1px;
+	border: solid 1px;
+}
+
+.amazon-book {
+	margin: 10px 15px;
+}
+
+footer {
+	text-align: center;
+	padding: 25px 0;
+	margin-top: 10px;
+	background-color: #dcdcdc;
+}
