@@ -1,14 +1,3 @@
-var MockLocation = function(latitude, longitude) {
-	this.k = 1; // 緯度
-	if(latitude) {
-		this.k = latitude;
-	}
-
-	this.A = 10; // 経度
-	if(longitude) {
-		this.A = longitude;
-	}
-};
 
 module("MockLocation の生成に関するテスト");
 test("MockLocation の生成", function() {
@@ -24,8 +13,8 @@ test("MockLocation の生成", function() {
 });
 
 
-var sut;
 module("InfoWindowStock の生成に関するテスト");
+var sut;
 QUnit.testStart(function() {
 	sut = new InfoWindowStock();
 });
