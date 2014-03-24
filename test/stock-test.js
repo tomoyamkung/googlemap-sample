@@ -25,19 +25,19 @@ test("MockLocation の生成", function() {
 
 
 var sut;
-module("InfoWindowStock の生成に関するテスト")
+module("InfoWindowStock の生成に関するテスト");
 QUnit.testStart(function() {
 	sut = new InfoWindowStock();
-})
+});
 test("InfoWindowsut の生成", function() {
 	notStrictEqual(sut, undefined, "インスタンスは生成される");
 });
 
 
-module("InfoWindowStock に関するテスト")
+module("InfoWindowStock に関するテスト");
 QUnit.testStart(function() {
 	sut = new InfoWindowStock();
-})
+});
 test("ストックされていない状態で get する", function() {
 	var expected = sut.get(new MockLocation());
 	var actual = undefined;
