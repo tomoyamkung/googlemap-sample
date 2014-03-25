@@ -9,6 +9,7 @@ var currentInfoWindow;
  * 
  */
 var stock = new InfoWindowStock();
+var sort;
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
@@ -45,6 +46,8 @@ function callbackRender(results, status) {
 
 		setupMarker(gmap, results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
+		sort = new LocationSort(results[0].geometry.location);
+			// LocationSort オブジェクトの生成
 		google.maps.event.addListener(gmap, 'click', function(event) {
 			// GoogleMap 上で左クリックがあったら、、、
 			setupMarker(gmap, event.latLng);
