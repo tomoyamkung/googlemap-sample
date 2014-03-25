@@ -19,16 +19,16 @@ module.exports = function(grunt) {
 
         // grunt-contrib-watch の設定
         watch: {
-        	live: { // LiveReload 用の設定
+            live: { // LiveReload 用の設定
 				// プロジェクト下のある 全 HTML, CSS, JavaScript を監視対象とする
-	            files: ['**/*.html', '**/*.css', '**/*.js'],
-	            options: {
-	                livereload: true // 上記のファイルが更新されたらブラウザをリロードする
-	            }
-        	},
+                files: ['**/*.html', '**/*.css', '**/*.js'],
+                options: {
+                    livereload: true // 上記のファイルが更新されたらブラウザをリロードする
+                }
+            },
             qunit: { // QUnit 用の設定
-	            files: ['test/**/*.js'], // test ディレクトリにある全 JavaScript を監視対象とする
-	            tasks: ['qunit']
+                files: ['test/**/*.js'], // test ディレクトリにある全 JavaScript を監視対象とする
+                tasks: ['qunit']
             }
         },
 
