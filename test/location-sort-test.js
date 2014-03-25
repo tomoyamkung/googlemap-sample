@@ -99,3 +99,25 @@ test("全方位に追加した Location を取得する", function() {
 	propEqual(actual[3], sw, "4番目に格納したものは 南西 の場所");
 });
 
+
+module("追加した Location の削除");
+QUnit.testStart(function() {
+	var center = new MockLocation(35.7100327, 139.81071550000001); // 中心点となる座標
+	sut = new LocationSort(center);
+});
+
+test("追加した Location を削除する", function() {
+	sut.add(new MockLocation(35.71051115238239, 139.81199026107788));
+	sut.add(new MockLocation(35.711064334670354, 139.80910420417786));
+	sut.add(new MockLocation(35.709221830730314, 139.81190979480743));
+	sut.add(new MockLocation(35.708864650097084, 139.80906665325165));
+
+	// Exercise
+	var actual = sut.clear();
+
+	// Verify
+	strictEqual(sut.hasNortheast(), false);
+	strictEqual(sut.hasNorthwest(), false);
+	strictEqual(sut.hasSoutheast(), false);
+	strictEqual(sut.hasSouthwest(), false);
+});

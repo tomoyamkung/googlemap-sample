@@ -148,6 +148,18 @@ LocationSort.prototype = {
 	 */
 	getAll: function() {
 		return this.stock;
+	},
+
+	/**
+	 * 保持している座標をすべて削除する。
+	 * 
+	 */
+	clear: function() {
+		this.stock = [];
+		this.northeast = [];
+		this.northwest = [];
+		this.southeast = [];
+		this.southwest = [];
 	}
 
 };
