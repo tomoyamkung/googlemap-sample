@@ -27,7 +27,7 @@ module.exports = function(grunt) {
                 }
             },
             qunit: { // QUnit 用の設定
-                files: ['test/**/*.js'], // test ディレクトリにある全 JavaScript を監視対象とする
+                files: ['test/**/*.js', 'js/**/*.js'], // test ディレクトリ、および、js ディレクトリにある全 JavaScript を監視対象とする
                 tasks: ['qunit']
             }
         },
