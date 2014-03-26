@@ -5,10 +5,10 @@ test("LocationSort の生成", function() {
 	var locationSort = new LocationSort(center);
 
 	notStrictEqual(locationSort, undefined);
-	strictEqual(locationSort.hasNortheast(), false);
-	strictEqual(locationSort.hasNorthwest(), false);
-	strictEqual(locationSort.hasSoutheast(), false);
-	strictEqual(locationSort.hasSouthwest(), false);
+	strictEqual(locationSort.northeast.length, 0);
+	strictEqual(locationSort.northwest.length, 0);
+	strictEqual(locationSort.southeast.length, 0);
+	strictEqual(locationSort.southwest.length, 0);
 });
 
 module("Location の追加と取得");
@@ -23,12 +23,12 @@ test("北東の位置に Location を格納するテスト", function() {
 	sut.add(location);
 	
 	// Verify
-	strictEqual(sut.hasNortheast(), true);
-	strictEqual(sut.hasNorthwest(), false);
-	strictEqual(sut.hasSoutheast(), false);
-	strictEqual(sut.hasSouthwest(), false);
+	strictEqual(sut.northeast.length, 1);
+	strictEqual(sut.northwest.length, 0);
+	strictEqual(sut.southeast.length, 0);
+	strictEqual(sut.southwest.length, 0);
 
-	var actual = sut.getNortheast();
+	var actual = sut.northeast;
 	strictEqual(actual.length, 1);
 	propEqual(actual[0], location);
 });
@@ -38,12 +38,12 @@ test("北西の位置に Location を格納するテスト", function() {
 	sut.add(location);
 	
 	// Verify
-	strictEqual(sut.hasNortheast(), false);
-	strictEqual(sut.hasNorthwest(), true);
-	strictEqual(sut.hasSoutheast(), false);
-	strictEqual(sut.hasSouthwest(), false);
+	strictEqual(sut.northeast.length, 0);
+	strictEqual(sut.northwest.length, 1);
+	strictEqual(sut.southeast.length, 0);
+	strictEqual(sut.southwest.length, 0);
 
-	var actual = sut.getNorthwest();
+	var actual = sut.northwest;
 	strictEqual(actual.length, 1);
 	propEqual(actual[0], location);
 });
@@ -53,12 +53,12 @@ test("南東の位置に Location を格納するテスト", function() {
 	sut.add(location);
 	
 	// Verify
-	strictEqual(sut.hasNortheast(), false);
-	strictEqual(sut.hasNorthwest(), false);
-	strictEqual(sut.hasSoutheast(), true);
-	strictEqual(sut.hasSouthwest(), false);
+	strictEqual(sut.northeast.length, 0);
+	strictEqual(sut.northwest.length, 0);
+	strictEqual(sut.southeast.length, 1);
+	strictEqual(sut.southwest.length, 0);
 
-	var actual = sut.getSoutheast();
+	var actual = sut.southeast;
 	strictEqual(actual.length, 1);
 	propEqual(actual[0], location);
 });
@@ -68,12 +68,12 @@ test("南西の位置に Location を格納するテスト", function() {
 	sut.add(location);
 	
 	// Verify
-	strictEqual(sut.hasNortheast(), false);
-	strictEqual(sut.hasNorthwest(), false);
-	strictEqual(sut.hasSoutheast(), false);
-	strictEqual(sut.hasSouthwest(), true);
+	strictEqual(sut.northeast.length, 0);
+	strictEqual(sut.northwest.length, 0);
+	strictEqual(sut.southeast.length, 0);
+	strictEqual(sut.southwest.length, 1);
 
-	var actual = sut.getSouthwest();
+	var actual = sut.southwest;
 	strictEqual(actual.length, 1);
 	propEqual(actual[0], location);
 });
@@ -89,7 +89,7 @@ test("全方位に追加した Location を取得する", function() {
 	sut.add(sw);
 
 	// Exercise
-	var actual = sut.getAll();
+	var actual = sut.stock;
 
 	// Verify
 	strictEqual(actual.length, 4, "格納されているオブジェクトの個数は4");
@@ -116,8 +116,8 @@ test("追加した Location を削除する", function() {
 	var actual = sut.clear();
 
 	// Verify
-	strictEqual(sut.hasNortheast(), false);
-	strictEqual(sut.hasNorthwest(), false);
-	strictEqual(sut.hasSoutheast(), false);
-	strictEqual(sut.hasSouthwest(), false);
+	strictEqual(sut.northeast.length, 0);
+	strictEqual(sut.northwest.length, 0);
+	strictEqual(sut.southeast.length, 0);
+	strictEqual(sut.southwest.length, 0);
 });
