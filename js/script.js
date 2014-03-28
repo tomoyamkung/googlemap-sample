@@ -9,9 +9,12 @@ var currentInfoWindow;
  * 
  */
 var stock = new InfoWindowStock();
+var sort;
+var states = new TogglesState();
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
+	states.bindButtons($('#button-ne'), $('#button-nw'), $('#button-se'), $('#button-sw'), $('#button-all'));
 
 	// 初期表示
 	var address = $('#address').val();
@@ -43,6 +46,8 @@ function callbackRender(results, status) {
 		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
 			// #map-canvas に GoogleMap を出力する
 
+		sort = new LocationSort(results[0].geometry.location);
+			// LocationSort オブジェクトの生成
 		setupMarker(gmap, results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
@@ -63,6 +68,7 @@ function callbackRender(results, status) {
  */
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
+	sort.add(marker);
 
 	this.disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にする
 
@@ -127,4 +133,3 @@ function adjustMapSize() {
 	var mapCanvas = $('#map-canvas');
 	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top) - padding + "px");
 }
-

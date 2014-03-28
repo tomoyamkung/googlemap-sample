@@ -28,8 +28,16 @@
 
 			<div class="row">
 				<div id="main" class="col-md-9">
-					<div class="well well-sm">
-						<div id="map-canvas"></div>
+					<div id="area-button" class="row text-center">
+						<button id="button-ne" type="button" class="btn btn-default" data-toggle="button">北東エリア</button>
+						<button id="button-nw" type="button" class="btn btn-default" data-toggle="button">北西エリア</button>
+						<button id="button-se" type="button" class="btn btn-default" data-toggle="button">南東エリア</button>
+						<button id="button-sw" type="button" class="btn btn-default" data-toggle="button">南西エリア</button>
+					</div>
+					<div class="row">
+						<div class="well well-sm">
+							<div id="map-canvas"></div>
+						</div>
 					</div>
 				</div>
 				<div id="right-side" class="col-md-3">
@@ -90,9 +98,12 @@
 		</div><!-- /.container -->
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 		<script type="text/javascript" src="./js/stock.js" charset="utf8"></script>
+		<script type="text/javascript" src="./js/location-sort.js" charset="utf8"></script>
+		<script type="text/javascript" src="./js/toggles-state.js" charset="utf8"></script>
 		<script type="text/javascript" src="./js/script.js" charset="utf8"></script>
 		<script type="text/template" id="infowindow_template">
 			<div class="well info-window">
