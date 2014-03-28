@@ -10,9 +10,11 @@ var currentInfoWindow;
  */
 var stock = new InfoWindowStock();
 var sort;
+var states = new TogglesState();
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
+	states.bindButtons($('#button-ne'), $('#button-nw'), $('#button-se'), $('#button-sw'), $('#button-all'));
 
 	// 初期表示
 	var address = $('#address').val();
@@ -131,4 +133,3 @@ function adjustMapSize() {
 	var mapCanvas = $('#map-canvas');
 	mapCanvas.css("height", ($(window).height() - mapCanvas.offset().top) - padding + "px");
 }
-
