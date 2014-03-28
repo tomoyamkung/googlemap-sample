@@ -62,16 +62,16 @@ var LocationSort = (function() {
 		 * @param {object} location 座標オブジェクト
 		 */
 		add: function(location) {
-			if(this.center.k < location.k && this.center.A < location.A) {
+			if(this.center.k < location.position.k && this.center.A < location.position.A) {
 				this.northeast.push(location);
 				this.stock.push(location);
-			} else if(this.center.k < location.k && location.A < this.center.A) {
+			} else if(this.center.k < location.position.k && location.position.A < this.center.A) {
 				this.northwest.push(location);
 				this.stock.push(location);
-			} else if(location.k < this.center.k && this.center.A < location.A) {
+			} else if(location.position.k < this.center.k && this.center.A < location.position.A) {
 				this.southeast.push(location);
 				this.stock.push(location);
-			} else if(location.k < this.center.k && location.A < this.center.A) {
+			} else if(location.position.k < this.center.k && location.position.A < this.center.A) {
 				this.southwest.push(location);
 				this.stock.push(location);
 			} 

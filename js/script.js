@@ -44,10 +44,10 @@ function callbackRender(results, status) {
 		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
 			// #map-canvas に GoogleMap を出力する
 
-		setupMarker(gmap, results[0].geometry.location);
-			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		sort = new LocationSort(results[0].geometry.location);
 			// LocationSort オブジェクトの生成
+		setupMarker(gmap, results[0].geometry.location);
+			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
 			// GoogleMap 上で左クリックがあったら、、、
 			setupMarker(gmap, event.latLng);
@@ -66,6 +66,7 @@ function callbackRender(results, status) {
  */
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
+	sort.add(marker);
 
 	this.disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にする
 
