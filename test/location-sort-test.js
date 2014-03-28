@@ -19,7 +19,7 @@ QUnit.testStart(function() {
 });
 
 test("北東の位置に Location を格納するテスト", function() {
-	var location = new MockLocation(35.71051115238239, 139.81199026107788);
+	var location = new MockPosition(35.71051115238239, 139.81199026107788);
 	sut.add(location);
 	
 	// Verify
@@ -28,13 +28,10 @@ test("北東の位置に Location を格納するテスト", function() {
 	strictEqual(sut.southeast.length, 0);
 	strictEqual(sut.southwest.length, 0);
 
-	var actual = sut.northeast;
-	strictEqual(actual.length, 1);
-	propEqual(actual[0], location);
 });
 
 test("北西の位置に Location を格納するテスト", function() {
-	var location = new MockLocation(35.711064334670354, 139.80910420417786);
+	var location = new MockPosition(35.711064334670354, 139.80910420417786);
 	sut.add(location);
 	
 	// Verify
@@ -43,13 +40,10 @@ test("北西の位置に Location を格納するテスト", function() {
 	strictEqual(sut.southeast.length, 0);
 	strictEqual(sut.southwest.length, 0);
 
-	var actual = sut.northwest;
-	strictEqual(actual.length, 1);
-	propEqual(actual[0], location);
 });
 
 test("南東の位置に Location を格納するテスト", function() {
-	var location = new MockLocation(35.709221830730314, 139.81190979480743);
+	var location = new MockPosition(35.709221830730314, 139.81190979480743);
 	sut.add(location);
 	
 	// Verify
@@ -58,13 +52,10 @@ test("南東の位置に Location を格納するテスト", function() {
 	strictEqual(sut.southeast.length, 1);
 	strictEqual(sut.southwest.length, 0);
 
-	var actual = sut.southeast;
-	strictEqual(actual.length, 1);
-	propEqual(actual[0], location);
 });
 
 test("南西の位置に Location を格納するテスト", function() {
-	var location = new MockLocation(35.708864650097084, 139.80906665325165);
+	var location = new MockPosition(35.708864650097084, 139.80906665325165);
 	sut.add(location);
 	
 	// Verify
@@ -73,30 +64,6 @@ test("南西の位置に Location を格納するテスト", function() {
 	strictEqual(sut.southeast.length, 0);
 	strictEqual(sut.southwest.length, 1);
 
-	var actual = sut.southwest;
-	strictEqual(actual.length, 1);
-	propEqual(actual[0], location);
-});
-
-test("全方位に追加した Location を取得する", function() {
-	var ne = new MockLocation(35.71051115238239, 139.81199026107788);
-	sut.add(ne);
-	var nw = new MockLocation(35.711064334670354, 139.80910420417786);
-	sut.add(nw);
-	var se = new MockLocation(35.709221830730314, 139.81190979480743);
-	sut.add(se);
-	var sw = new MockLocation(35.708864650097084, 139.80906665325165);
-	sut.add(sw);
-
-	// Exercise
-	var actual = sut.stock;
-
-	// Verify
-	strictEqual(actual.length, 4, "格納されているオブジェクトの個数は4");
-	propEqual(actual[0], ne, "1番目に格納したものは 北東 の場所");
-	propEqual(actual[1], nw, "2番目に格納したものは 北西 の場所");
-	propEqual(actual[2], se, "3番目に格納したものは 南東 の場所");
-	propEqual(actual[3], sw, "4番目に格納したものは 南西 の場所");
 });
 
 
@@ -107,10 +74,10 @@ QUnit.testStart(function() {
 });
 
 test("追加した Location を削除する", function() {
-	sut.add(new MockLocation(35.71051115238239, 139.81199026107788));
-	sut.add(new MockLocation(35.711064334670354, 139.80910420417786));
-	sut.add(new MockLocation(35.709221830730314, 139.81190979480743));
-	sut.add(new MockLocation(35.708864650097084, 139.80906665325165));
+	sut.add(new MockPosition(35.71051115238239, 139.81199026107788));
+	sut.add(new MockPosition(35.711064334670354, 139.80910420417786));
+	sut.add(new MockPosition(35.709221830730314, 139.81190979480743));
+	sut.add(new MockPosition(35.708864650097084, 139.80906665325165));
 
 	// Exercise
 	var actual = sut.clear();
