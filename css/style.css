@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+#area-button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
 #map-canvas {
 	width: 100%;
 }
