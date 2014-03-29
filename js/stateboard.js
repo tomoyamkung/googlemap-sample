@@ -7,14 +7,8 @@ var ToggleBoard = (function() {
 	/**
 	 * コンストラクタ関数。
 	 * 
-	 * 各エリアボタンのクリックイベントを設定する。
-	 * 
-	 * @param  {object} ne
-	 * @param  {object} nw
-	 * @param  {object} se
-	 * @param  {object} sw
 	 */
-	var constructor = function(ne, nw, se, sw) {
+	var constructor = function() {
 
 		/**
 		 * 「北東エリア」のボタン。
@@ -43,27 +37,15 @@ var ToggleBoard = (function() {
 		 * @type {Boolean} true の場合、非表示を表す
 		 */
 		this.sw = false;
-
-		// var self = this;
-		
-		// ne.click(function() {
-		// 	self.ne = !self.ne;
-		// });
-
-		// nw.click(function() {
-		// 	self.nw = !self.nw;
-		// });
-
-		// se.click(function() {
-		// 	self.se = !self.se;
-		// });
-
-		// sw.click(function() {
-		// 	self.sw = !self.sw;
-		// });
-
 	};
 
+	/**
+	 * トグルボタンの状態を切り替える。
+	 *
+	 * 選択中になっていたものは、状態を非選択中に変更する。
+	 * 
+	 * @param  {String} id トグルボタンの ID 属性名称
+	 */
 	constructor.prototype.toggle = function(id) {
 		if(id === "ne") {
 			this.ne = !this.ne;
