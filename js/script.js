@@ -10,15 +10,10 @@ var currentInfoWindow;
  */
 var stock = new InfoWindowStock();
 var sort;
-var board = new ToggleBoard($('#ne'), $('#nw'), $('#se'), $('#sw'));
+var board = new ToggleBoard();
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
-
-	$('button[data-toggle]').click(function(event) {
-		var id = $(this).attr('id');
-		board.toggle(id);
-	});
 
 	// 初期表示
 	var address = $('#address').val();
@@ -29,7 +24,20 @@ $(function() {
 		address = $(this).val();
 		geocoder.geocode({'address': address}, callbackRender);
 	});
+
+	setUpToggleButtons();
 });
+
+/**
+ * トグルボタンがクリックされたら ID 属性名称を取得して、`ToggleBoard#toggle` を実行する。
+ * 
+ */
+function setUpToggleButtons () {
+	$('button[data-toggle]').click(function() {
+		var id = $(this).attr('id');
+		board.toggle(id);
+	});
+}
 
 /**
  * ジオコーダの結果を取得したときに実行するコールバック関数。
