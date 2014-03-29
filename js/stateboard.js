@@ -4,7 +4,17 @@
  */
 var TogglesState = (function() {
 
-	var constructor = function() {
+	/**
+	 * コンストラクタ関数。
+	 * 
+	 * 各エリアボタンのクリックイベントを設定する。
+	 * 
+	 * @param  {object} ne
+	 * @param  {object} nw
+	 * @param  {object} se
+	 * @param  {object} sw
+	 */
+	var constructor = function(ne, nw, se, sw) {
 
 		/**
 		 * 「北東エリア」のボタン。
@@ -33,17 +43,7 @@ var TogglesState = (function() {
 		 * @type {Boolean} true の場合、非表示を表す
 		 */
 		this.sw = false;
-	};
 
-	/**
-	 * 各エリアボタンのクリックイベントをバインドする。
-	 * 
-	 * @param  {object} ne
-	 * @param  {object} nw
-	 * @param  {object} se
-	 * @param  {object} sw
-	 */
-	constructor.prototype.bind = function(ne, nw, se, sw) {
 		var self = this;
 		
 		ne.click(function() {

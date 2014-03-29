@@ -10,11 +10,11 @@ var currentInfoWindow;
  */
 var stock = new InfoWindowStock();
 var sort;
-var states = new TogglesState();
+var states;
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
-	states.bind($('#ne'), $('#nw'), $('#se'), $('#sw'));
+	states = new TogglesState($('#ne'), $('#nw'), $('#se'), $('#sw'));
 
 	// 初期表示
 	var address = $('#address').val();
