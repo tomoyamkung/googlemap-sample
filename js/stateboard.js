@@ -44,25 +44,37 @@ var ToggleBoard = (function() {
 		 */
 		this.sw = false;
 
-		var self = this;
+		// var self = this;
 		
-		ne.click(function() {
-			self.ne = !self.ne;
-		});
+		// ne.click(function() {
+		// 	self.ne = !self.ne;
+		// });
 
-		nw.click(function() {
-			self.nw = !self.nw;
-		});
+		// nw.click(function() {
+		// 	self.nw = !self.nw;
+		// });
 
-		se.click(function() {
-			self.se = !self.se;
-		});
+		// se.click(function() {
+		// 	self.se = !self.se;
+		// });
 
-		sw.click(function() {
-			self.sw = !self.sw;
-		});
+		// sw.click(function() {
+		// 	self.sw = !self.sw;
+		// });
 
 	};
+
+	constructor.prototype.toggle = function(id) {
+		if(id === "ne") {
+			this.ne = !this.ne;
+		} else if(id === "nw") {
+			this.nw = !this.nw;
+		} else if(id === "se") {
+			this.se = !this.se;
+		} else if(id === "sw") {
+			this.sw = !this.sw;
+		}
+	}
 
 	return constructor;
 })();

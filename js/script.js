@@ -10,11 +10,15 @@ var currentInfoWindow;
  */
 var stock = new InfoWindowStock();
 var sort;
-var board;
+var board = new ToggleBoard($('#ne'), $('#nw'), $('#se'), $('#sw'));
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
-	board = new ToggleBoard($('#ne'), $('#nw'), $('#se'), $('#sw'));
+
+	$('button[data-toggle]').click(function(event) {
+		var id = $(this).attr('id');
+		board.toggle(id);
+	});
 
 	// 初期表示
 	var address = $('#address').val();
