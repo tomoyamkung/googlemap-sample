@@ -38,27 +38,27 @@ var TogglesState = (function() {
 	/**
 	 * 各エリアボタンのクリックイベントをバインドする。
 	 * 
-	 * @param  {object} neButton
-	 * @param  {object} nwButton
-	 * @param  {object} seButton
-	 * @param  {object} swButton
+	 * @param  {object} ne
+	 * @param  {object} nw
+	 * @param  {object} se
+	 * @param  {object} sw
 	 */
-	constructor.prototype.bindButtons = function(neButton, nwButton, seButton, swButton) {
+	constructor.prototype.bind = function(ne, nw, se, sw) {
 		var self = this;
 		
-		neButton.click(function() {
+		ne.click(function() {
 			self.ne = !self.ne;
 		});
 
-		nwButton.click(function() {
+		nw.click(function() {
 			self.nw = !self.nw;
 		});
 
-		seButton.click(function() {
+		se.click(function() {
 			self.se = !self.se;
 		});
 
-		swButton.click(function() {
+		sw.click(function() {
 			self.sw = !self.sw;
 		});
 
