@@ -2,7 +2,7 @@
  * トグルボタンの状態を保持するクラス。
  * 
  */
-var TogglesState = (function() {
+var ToggleBoard = (function() {
 
 	/**
 	 * コンストラクタ関数。
