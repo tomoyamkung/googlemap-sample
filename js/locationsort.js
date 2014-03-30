@@ -64,16 +64,16 @@ var LocationSort = (function() {
 		add: function(location) {
 			if(this.center.k < location.position.k && this.center.A < location.position.A) {
 				this.northeast.push(location);
-				this.stock.push(location);
+				// this.stock.push(location);
 			} else if(this.center.k < location.position.k && location.position.A < this.center.A) {
 				this.northwest.push(location);
-				this.stock.push(location);
+				// this.stock.push(location);
 			} else if(location.position.k < this.center.k && this.center.A < location.position.A) {
 				this.southeast.push(location);
-				this.stock.push(location);
+				// this.stock.push(location);
 			} else if(location.position.k < this.center.k && location.position.A < this.center.A) {
 				this.southwest.push(location);
-				this.stock.push(location);
+				// this.stock.push(location);
 			} 
 		},
 
@@ -87,6 +87,39 @@ var LocationSort = (function() {
 			this.northwest = [];
 			this.southeast = [];
 			this.southwest = [];
+		},
+		/**
+		 * Marker の表示を反転する。
+		 *
+		 * ブラグが立っているエリアの Marker の表示を反転する。
+		 * 
+		 * @param  {Boolean} ne 北東エリアのフラグ
+		 * @param  {Boolean} nw 北西エリアのフラグ
+		 * @param  {Boolean} se 南東エリアのフラグ
+		 * @param  {Boolean} sw 南西エリアのフラグ
+		 */
+		toggleMarker: function(ne, nw, se, sw) {
+			if(ne) {
+				this.northeast.forEach(function(marker, i) {
+					marker.setMap(null);
+				});
+			}
+			if(nw) {
+				this.northwest.forEach(function(marker, i) {
+					marker.setMap(null);
+				});
+			}
+			if(se) {
+				this.southeast.forEach(function(marker, i) {
+					marker.setMap(null);
+				});
+			}
+			if(sw) {
+				this.southwest.forEach(function(marker, i) {
+					marker.setMap(null);
+				});
+			}
+			
 		}
 	};	
 

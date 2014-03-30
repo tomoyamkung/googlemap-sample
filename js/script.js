@@ -36,6 +36,10 @@ function setUpToggleButtons () {
 	$('button[data-toggle]').click(function() {
 		var id = $(this).attr('id');
 		board.toggle(id);
+
+		if(sort) {
+			sort.toggleMarker(board.ne, board.nw, board.se, board.sw);
+		}
 	});
 }
 
