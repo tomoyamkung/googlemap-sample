@@ -13,13 +13,6 @@ var LocationSort = (function() {
 		this.center = center;
 
 		/**
-		 * 追加される座標を格納する配列。
-		 * 
-		 * @type {Array}
-		 */
-		this.stock = [];
-
-		/**
 		 * 中心点から北東の位置にある Location を格納する配列。
 		 * 
 		 * @type {Array}
@@ -64,16 +57,12 @@ var LocationSort = (function() {
 		add: function(location) {
 			if(this.center.k < location.position.k && this.center.A < location.position.A) {
 				this.northeast.push(location);
-				// this.stock.push(location);
 			} else if(this.center.k < location.position.k && location.position.A < this.center.A) {
 				this.northwest.push(location);
-				// this.stock.push(location);
 			} else if(location.position.k < this.center.k && this.center.A < location.position.A) {
 				this.southeast.push(location);
-				// this.stock.push(location);
 			} else if(location.position.k < this.center.k && location.position.A < this.center.A) {
 				this.southwest.push(location);
-				// this.stock.push(location);
 			} 
 		},
 
@@ -82,7 +71,6 @@ var LocationSort = (function() {
 		 * 
 		 */
 		clear: function() {
-			this.stock = [];
 			this.northeast = [];
 			this.northwest = [];
 			this.southeast = [];
@@ -99,26 +87,21 @@ var LocationSort = (function() {
 		 * @param  {Boolean} sw 南西エリアのフラグ
 		 */
 		toggleMarker: function(ne, nw, se, sw) {
-			if(ne) {
-				this.northeast.forEach(function(marker, i) {
-					marker.setMap(null);
-				});
-			}
-			if(nw) {
-				this.northwest.forEach(function(marker, i) {
-					marker.setMap(null);
-				});
-			}
-			if(se) {
-				this.southeast.forEach(function(marker, i) {
-					marker.setMap(null);
-				});
-			}
-			if(sw) {
-				this.southwest.forEach(function(marker, i) {
-					marker.setMap(null);
-				});
-			}
+			this.northeast.forEach(function(marker, i) {
+				marker.setVisible(!ne);
+			});
+
+			this.northwest.forEach(function(marker, i) {
+				marker.setVisible(!nw);
+			});
+
+			this.southeast.forEach(function(marker, i) {
+				marker.setVisible(!se);
+			});
+
+			this.southwest.forEach(function(marker, i) {
+				marker.setVisible(!sw);
+			});
 			
 		}
 	};	
