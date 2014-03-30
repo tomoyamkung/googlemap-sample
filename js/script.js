@@ -3,7 +3,7 @@
  * 生成した InfoWindow をストックする。
  * 
  */
-var stock = new InfoWindowStock();
+var infoWindowStock = new InfoWindowStock();
 var sort;
 var board = new ToggleBoard();
 
@@ -82,9 +82,9 @@ function displayMarker(map, location) {
 		// Marker オブジェクトを生成して、地図上に表示する
 
 	sort.add(marker);
-	stock.put(location, marker); // Marker の InfoWindow オブジェクトを生成して stock に追加する
+	infoWindowStock.put(location, marker); // Marker の InfoWindow オブジェクトを生成して stock に追加する
 	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
-		stock.redisplay(event.latLng, marker); // クリックされた Marker の InfoWindow を再表示する
+		infoWindowStock.redisplay(event.latLng, marker); // クリックされた Marker の InfoWindow を再表示する
 	});
 }
 
