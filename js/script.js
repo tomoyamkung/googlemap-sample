@@ -85,59 +85,13 @@ function callbackRender(results, status) {
 function setupMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location});
 		// Marker オブジェクトを生成して、地図上に表示する
+	
 	sort.add(marker);
-
-	this.disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にする
-
-	currentInfoWindow = createInfoWindow(location.k, location.A); // InfoWindow オブジェクトを生成し、、、
-	currentInfoWindow.open(marker.getMap(), marker); // InfoWindow を表示し、、、
-	stock.put(location, currentInfoWindow); // stock に追加する
+	stock.put(location, marker); // stock に追加する
 
 	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
-		disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にし、、、
-		currentInfoWindow = stock.get(event.latLng); // stock から InfoWindow を取り出して、、、
-		currentInfoWindow.open(marker.getMap(), marker); // Marker に InfoWindow を表示する
+		stock.redisplay(event.latLng, marker);
 	});
-}
-
-/**
- * 表示中の InfoWindow があれば非表示にする。
- * 
- */
-function disableCurrentInfoWindow () {
-	if(this.currentInfoWindow) {
-		this.currentInfoWindow.close();
-	}
-}
-
-/**
- * InfoWindow オブジェクトを生成する。
- * 
- * @param  {Number} latitude 緯度
- * @param  {Number} longitude 経度
- * @return {Object} InfoWindow オブジェクト
- */
-function createInfoWindow(latitude, longitude) {
-	var infoWindow = new google.maps.InfoWindow({
-		content: createTag(latitude, longitude), // InfoWindow に表示するコンテンツ
-		// maxWidth: 1000 // width は CSS で制御するようにしたのでコメントアウト
-	});
-	return infoWindow;
-}
-
-/**
- * InfoWindow 内に設定する HTML を生成する。
- *
- * HTML の生成は Underscore.js を使い、テンプレートは index.html 内に定義してある。
- * 
- * @param  {Number} latitude 緯度
- * @param  {Number} longitude 経度
- * @return {Object} InfoWindow に設定するタグ
- */
-function createTag(latitude, longitude) {
-	var template = _.template($('#infowindow_template').text());
-	var tag = template({latitude: latitude, longitude: longitude});
-	return tag;
 }
 
 /**
