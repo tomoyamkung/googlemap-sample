@@ -1,16 +1,26 @@
 /**
- * InfoWinow オブジェクトをストックするクラス。
+ * 生成した Marker に紐づく InfoWinow オブジェクトをストックするクラス。
  * 
  */
 var InfoWindowStock = function() {
 	/**
 	 * InfoWindow をストックするハッシュ。
+	 * 
 	 * @type {Array}
 	 */
 	this.stock = [];
-	this.currentInfoWindow;
-	this.location;
-	// this.currentInfoWindowLocation = "";
+
+	/**
+	 * 現在表示中の InfoWindow オブジェクト。
+	 * 
+	 */
+	this.currentInfoWindow = null;
+
+	/**
+	 * 現在表示中の InfoWindow オブジェクト の位置情報。
+	 * 
+	 */
+	this.location = null;
 };
 InfoWindowStock.prototype = {
 	/**
@@ -40,7 +50,6 @@ InfoWindowStock.prototype = {
 
 		this.currentInfoWindow = infoWindow;
 		this.location = location;
-		// this.currentInfoWindowLocation = LocationSort.judge(null, location);
 	},
 	/**
 	 * ストックしてある InfoWindow から該当するものを取得する。
@@ -57,7 +66,6 @@ InfoWindowStock.prototype = {
 		
 		this.currentInfoWindow = infoWindow;
 		this.location = location;
-		// this.currentInfoWindowLocation = LocationSort.judge(null, location);
 	},
 	/**
 	 * InfoWindow オブジェクトを生成する。
@@ -87,6 +95,14 @@ InfoWindowStock.prototype = {
 			this.currentInfoWindow.close();
 		}
 	},
+	/**
+	 * 表示中の InfoWindow が「非表示のエリア」だった場合に InfoWindow を非表示にする。
+	 * 
+	 * @param  {Boolean} ne 基準点から「北東エリア」が非表示かどうかを表すフラグ。true なら非表示
+	 * @param  {Boolean} nw 基準点から「北西エリア」が非表示かどうかを表すフラグ。true なら非表示
+	 * @param  {Boolean} se 基準点から「南東エリア」が非表示かどうかを表すフラグ。true なら非表示
+	 * @param  {Boolean} sw 基準点から「南西エリア」が非表示かどうかを表すフラグ。true なら非表示
+	 */
 	toggleCurrentInfoWindow: function(ne, nw, se, sw) {
 		var currentInfoWindowLocation = LocationSort.judge(null, this.location);
 
