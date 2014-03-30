@@ -83,7 +83,8 @@ function callbackRender(results, status) {
  * @param  {Object} location Marker を立てる位置
  */
 function setupMarker(map, location) {
-	var marker = new google.maps.Marker({map: map, position: location}); // Marker オブジェクトを生成する
+	var marker = new google.maps.Marker({map: map, position: location});
+		// Marker オブジェクトを生成して、地図上に表示する
 	sort.add(marker);
 
 	this.disableCurrentInfoWindow(); // 表示中の InfoWindow があれば非表示にする
