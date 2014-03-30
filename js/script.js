@@ -27,7 +27,7 @@ $(function() {
  * トグルボタンがクリックされたら ID 属性名称を取得して、`ToggleBoard#toggle` を実行する。
  * 
  */
-function setUpToggleButtons () {
+function setUpToggleButtons() {
 	$('button[data-toggle]').click(function() {
 		var id = $(this).attr('id');
 		board.toggle(id);

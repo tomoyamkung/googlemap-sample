@@ -55,13 +55,14 @@ var Markers = (function() {
 		 * @param {object} location 座標オブジェクト
 		 */
 		add: function(location) {
-			if(this.center.k < location.position.k && this.center.A < location.position.A) {
+			var result = LocationSort.judge(this.center, location);
+			if(result === "ne") {
 				this.northeast.push(location);
-			} else if(this.center.k < location.position.k && location.position.A < this.center.A) {
+			} else if(result === "nw") {
 				this.northwest.push(location);
-			} else if(location.position.k < this.center.k && this.center.A < location.position.A) {
+			} else if(result === "se") {
 				this.southeast.push(location);
-			} else if(location.position.k < this.center.k && location.position.A < this.center.A) {
+			} else if(result === "sw") {
 				this.southwest.push(location);
 			} 
 		},
