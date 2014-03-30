@@ -1,8 +1,3 @@
-/**
- * 表示中の InfoWindow オブジェクト。
- * 
- */
-var currentInfoWindow;
 
 /**
  * 生成した InfoWindow をストックする。
@@ -64,11 +59,11 @@ function callbackRender(results, status) {
 
 		sort = new LocationSort(results[0].geometry.location);
 			// LocationSort オブジェクトの生成
-		setupMarker(gmap, results[0].geometry.location);
+		displayMarker(gmap, results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
 			// GoogleMap 上で左クリックがあったら、、、
-			setupMarker(gmap, event.latLng);
+			displayMarker(gmap, event.latLng);
 				// その場所に Marker を立てる
 		});
 
@@ -82,15 +77,14 @@ function callbackRender(results, status) {
  * @param  {Object} map Marker を立てる GoogleMap オブジェクト
  * @param  {Object} location Marker を立てる位置
  */
-function setupMarker(map, location) {
+function displayMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location});
 		// Marker オブジェクトを生成して、地図上に表示する
-	
-	sort.add(marker);
-	stock.put(location, marker); // stock に追加する
 
+	sort.add(marker);
+	stock.put(location, marker); // Marker の InfoWindow オブジェクトを生成して stock に追加する
 	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
-		stock.redisplay(event.latLng, marker);
+		stock.redisplay(event.latLng, marker); // クリックされた Marker の InfoWindow を再表示する
 	});
 }
 
