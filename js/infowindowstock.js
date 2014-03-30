@@ -9,6 +9,8 @@ var InfoWindowStock = function() {
 	 */
 	this.stock = [];
 	this.currentInfoWindow;
+	this.location;
+	// this.currentInfoWindowLocation = "";
 };
 InfoWindowStock.prototype = {
 	/**
@@ -37,6 +39,8 @@ InfoWindowStock.prototype = {
 		this.stock[key] = infoWindow;
 
 		this.currentInfoWindow = infoWindow;
+		this.location = location;
+		// this.currentInfoWindowLocation = LocationSort.judge(null, location);
 	},
 	/**
 	 * ストックしてある InfoWindow から該当するものを取得する。
@@ -52,6 +56,8 @@ InfoWindowStock.prototype = {
 		infoWindow.open(marker.getMap(), marker); // Marker に InfoWindow を表示する
 		
 		this.currentInfoWindow = infoWindow;
+		this.location = location;
+		// this.currentInfoWindowLocation = LocationSort.judge(null, location);
 	},
 	/**
 	 * InfoWindow オブジェクトを生成する。
@@ -80,5 +86,22 @@ InfoWindowStock.prototype = {
 		if(this.currentInfoWindow) {
 			this.currentInfoWindow.close();
 		}
-	}	
+	},
+	toggleCurrentInfoWindow: function(ne, nw, se, sw) {
+		var currentInfoWindowLocation = LocationSort.judge(null, this.location);
+
+		if(currentInfoWindowLocation === "ne" && ne === true) {
+			this.disableCurrentInfoWindow();
+		}
+		if(currentInfoWindowLocation === "nw" && nw === true) {
+			this.disableCurrentInfoWindow();
+		}
+		if(currentInfoWindowLocation === "se" && se === true) {
+			this.disableCurrentInfoWindow();
+		}
+		if(currentInfoWindowLocation === "sw" && sw === true) {
+			this.disableCurrentInfoWindow();
+		}
+		
+	}
 };

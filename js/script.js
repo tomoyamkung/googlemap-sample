@@ -34,6 +34,7 @@ function setUpToggleButtons() {
 
 		if(markers) {
 			markers.toggleMarker(board.ne, board.nw, board.se, board.sw);
+			infoWindowStock.toggleCurrentInfoWindow(board.ne, board.nw, board.se, board.sw);
 		}
 	});
 }
