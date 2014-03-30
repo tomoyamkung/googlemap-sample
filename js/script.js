@@ -4,7 +4,7 @@
  * 
  */
 var infoWindowStock = new InfoWindowStock();
-var sort;
+var markers;
 var board = new ToggleBoard();
 
 $(function() {
@@ -32,8 +32,8 @@ function setUpToggleButtons () {
 		var id = $(this).attr('id');
 		board.toggle(id);
 
-		if(sort) {
-			sort.toggleMarker(board.ne, board.nw, board.se, board.sw);
+		if(markers) {
+			markers.toggleMarker(board.ne, board.nw, board.se, board.sw);
 		}
 	});
 }
@@ -57,8 +57,8 @@ function callbackRender(results, status) {
 		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
 			// #map-canvas に GoogleMap を出力する
 
-		sort = new LocationSort(results[0].geometry.location);
-			// LocationSort オブジェクトの生成
+		markers = new Markers(results[0].geometry.location);
+			// Markers オブジェクトの生成
 		displayMarker(gmap, results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
@@ -81,7 +81,7 @@ function displayMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location});
 		// Marker オブジェクトを生成して、地図上に表示する
 
-	sort.add(marker);
+	markers.add(marker);
 	infoWindowStock.put(location, marker); // Marker の InfoWindow オブジェクトを生成して stock に追加する
 	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
 		infoWindowStock.redisplay(event.latLng, marker); // クリックされた Marker の InfoWindow を再表示する

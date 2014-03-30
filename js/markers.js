@@ -3,7 +3,7 @@
  * 
  * @param {object} center 中心点となる座標
  */
-var LocationSort = (function() {
+var Markers = (function() {
 	var constructor = function(center) {
 		/**
 		 * 中心点となる座標。
