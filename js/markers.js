@@ -108,4 +108,4 @@ var Markers = (function() {
 	};	
 
 	return constructor;
-})(); // モジュールパターンによるクラス定義(http://ledsun.hatenablog.com/entry/2013/09/17/180723)
+})();
