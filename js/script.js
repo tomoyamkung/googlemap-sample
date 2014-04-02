@@ -1,11 +1,7 @@
 
-/**
- * 生成した InfoWindow をストックする。
- * 
- */
-var infoWindowStock = new InfoWindowStock();
-var markers;
 var board = new ToggleBoard();
+var stock = new Stock();
+var centerLocation = null;
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
@@ -31,11 +27,7 @@ function setUpToggleButtons() {
 	$('button[data-toggle]').click(function() {
 		var id = $(this).attr('id');
 		board.toggle(id);
-
-		if(markers) {
-			markers.toggleMarker(board.ne, board.nw, board.se, board.sw);
-			infoWindowStock.toggleCurrentInfoWindow(board.ne, board.nw, board.se, board.sw);
-		}
+		stock.toggle(board);
 	});
 }
 
@@ -50,6 +42,9 @@ function setUpToggleButtons() {
  */
 function callbackRender(results, status) {
 	if(status == google.maps.GeocoderStatus.OK) {
+		centerLocation = new Location(results[0].geometry.location);
+			// この緯度・経度が中心点となるので Location オブジェクトを生成する	
+
 		var options = {
 			zoom: 18,
 			center: results[0].geometry.location, // 指定の住所から計算した緯度経度を指定する
@@ -58,8 +53,6 @@ function callbackRender(results, status) {
 		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
 			// #map-canvas に GoogleMap を出力する
 
-		markers = new Markers(results[0].geometry.location);
-			// Markers オブジェクトの生成
 		displayMarker(gmap, results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
@@ -82,11 +75,12 @@ function displayMarker(map, location) {
 	var marker = new google.maps.Marker({map: map, position: location});
 		// Marker オブジェクトを生成して、地図上に表示する
 
-	markers.add(marker);
-	infoWindowStock.put(location, marker); // Marker の InfoWindow オブジェクトを生成して stock に追加する
+	var markerInfoWindow = new MarkderInfoWindow(marker, new Location(location), centerLocation);
 	google.maps.event.addListener(marker, 'click', function(event) { // Marker がクリックされたら、、、
-		infoWindowStock.redisplay(event.latLng, marker); // クリックされた Marker の InfoWindow を再表示する
+		stock.hideInfoWindow(); // すべての InfoWindow を非表示にして、、、
+		markerInfoWindow.showInfoWindow(); // この Marker の InfoWindow だけ表示する
 	});
+	stock.add(markerInfoWindow);
 }
 
 /**

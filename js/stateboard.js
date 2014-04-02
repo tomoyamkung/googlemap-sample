@@ -46,17 +46,32 @@ var ToggleBoard = (function() {
 	 * 
 	 * @param  {String} id トグルボタンの ID 属性名称
 	 */
-	constructor.prototype.toggle = function(id) {
-		if(id === "ne") {
-			this.ne = !this.ne;
-		} else if(id === "nw") {
-			this.nw = !this.nw;
-		} else if(id === "se") {
-			this.se = !this.se;
-		} else if(id === "sw") {
-			this.sw = !this.sw;
+	constructor.prototype = {
+		toggle: function(id) {
+			if(id === "ne") {
+				this.ne = !this.ne;
+			} else if(id === "nw") {
+				this.nw = !this.nw;
+			} else if(id === "se") {
+				this.se = !this.se;
+			} else if(id === "sw") {
+				this.sw = !this.sw;
+			}
+		},
+		isHideDirection: function(direction) {
+			var result = false;
+			if(direction === "ne" && this.ne === true) {
+				result = true;
+			} else if(direction === "nw" && this.nw === true) {
+				result = true;
+			} else if(direction === "se" && this.se === true) {
+				result = true;
+			} else if(direction === "sw" && this.sw === true) {
+				result = true;
+			} 
+			return result;
 		}
-	}
+	};
 
 	return constructor;
 })();
