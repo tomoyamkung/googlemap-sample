@@ -28,18 +28,10 @@ var LocationSort = (function() {
 		 * @return {String}          方角を表す文字列
 		 */
 		judge: function(center, location) {
-			var k; // 緯度
-			var A; // 経度
-			
-			if(location.position === undefined) {
-				k = location.k;
-				A = location.A;
-			} else {
-				k = location.position.k;
-				A = location.position.A;
-			}
+			var k = location.k; // 緯度
+			var A = location.A; // 経度
 
-			if(center) {
+			if(center != null) {
 				_center = center;
 			}
 

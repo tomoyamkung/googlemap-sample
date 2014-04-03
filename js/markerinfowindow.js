@@ -13,8 +13,8 @@ var MarkderInfoWindow = (function() {
 	 */
 	var constructor = function(marker, location, centerLocation) {
 		this.marker = marker;
-		this.infoWindow = this.createInfoWindow(location);
-		this.direction = LocationSort.judge(centerLocation, location);
+		this.infoWindow = this.createInfoWindow(location); // Marker に紐づく InfoWindow オブジェクト
+		this.direction = LocationSort.judge(centerLocation, location); // この Marker の方角
 
 		this.showInfoWindow();
 	};

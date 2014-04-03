@@ -5,48 +5,63 @@
 var ToggleBoard = (function() {
 
 	/**
+	 * 表示を表す識別子。
+	 * 
+	 */
+	var show = false;
+
+	/**
+	 * 非表示を表す識別子。
+	 * 
+	 */
+	var hide = true;	
+
+	/**
 	 * コンストラクタ関数。
+	 *
+	 * 各方角の表示・非表示フラグを初期化する。
+	 * 初期状態は「表示」とする。
 	 * 
 	 */
 	var constructor = function() {
 
 		/**
-		 * 「北東エリア」のボタン。
+		 * 「北東エリア」のフラグ。
 		 * 
 		 * @type {Boolean} true の場合、非表示を表す
 		 */
-		this.ne = false;
+		this.ne = show;
 
 		/**
-		 * 「北西エリア」のボタン。
+		 * 「北西エリア」のフラグ。
 
 		 * @type {Boolean} true の場合、非表示を表す
 		 */
-		this.nw = false;
+		this.nw = show;
 
 		/**
-		 * 「南東エリア」のボタン。
+		 * 「南東エリア」のフラグ。
 		 * 
 		 * @type {Boolean} true の場合、非表示を表す
 		 */
-		this.se = false;
+		this.se = show;
 
 		/**
-		 * 「南西エリア」のボタン。
+		 * 「南西エリア」のフラグ。
 		 * 
 		 * @type {Boolean} true の場合、非表示を表す
 		 */
-		this.sw = false;
+		this.sw = show;
 	};
 
-	/**
-	 * トグルボタンの状態を切り替える。
-	 *
-	 * 選択中になっていたものは、状態を非選択中に変更する。
-	 * 
-	 * @param  {String} id トグルボタンの ID 属性名称
-	 */
 	constructor.prototype = {
+		/**
+		 * トグルボタンの状態を切り替える。
+		 *
+		 * 選択中になっていたものは、状態を非選択中に変更する。
+		 * 
+		 * @param  {String} id トグルボタンの ID 属性名称
+		 */
 		toggle: function(id) {
 			if(id === "ne") {
 				this.ne = !this.ne;
@@ -58,16 +73,22 @@ var ToggleBoard = (function() {
 				this.sw = !this.sw;
 			}
 		},
+		/**
+		 * パラメータで受け取った「方角」が非表示のエリアなのかを問い合わせる。
+		 * 
+		 * @param  {String}  direction 方角
+		 * @return {Boolean}           非表示のエリアなら true
+		 */
 		isHideDirection: function(direction) {
-			var result = false;
-			if(direction === "ne" && this.ne === true) {
-				result = true;
-			} else if(direction === "nw" && this.nw === true) {
-				result = true;
-			} else if(direction === "se" && this.se === true) {
-				result = true;
-			} else if(direction === "sw" && this.sw === true) {
-				result = true;
+			var result = show;
+			if(direction === "ne" && this.ne === hide) {
+				result = hide;
+			} else if(direction === "nw" && this.nw === hide) {
+				result = hide;
+			} else if(direction === "se" && this.se === hide) {
+				result = hide;
+			} else if(direction === "sw" && this.sw === hide) {
+				result = hide;
 			} 
 			return result;
 		}
