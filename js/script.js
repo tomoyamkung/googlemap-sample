@@ -2,18 +2,23 @@
 var board = new ToggleBoard();
 var stock = new Stock();
 var centerLocation = null;
+var gmap = null;
 
 $(function() {
 	var geocoder = new google.maps.Geocoder();
 
 	// 初期表示
-	var address = $('#address').val();
-	geocoder.geocode({'address': address}, callbackRender);
+	geocoder.geocode({'address': $('#address').val()}, callbackRender);
 
 	// 住所が入力された場合の対応
 	$('#address').change(function(event) {
-		address = $(this).val();
-		geocoder.geocode({'address': address}, callbackRender);
+		var inputString = $(this).val();
+		if(InputStringParser.isLatLng(inputString)) {
+			var array = inputString.split(":");
+			displayMarker(new google.maps.LatLng(array[0], array[1]));
+		} else {
+			geocoder.geocode({'address': inputString}, callbackRender);
+		}
 	});
 
 	setUpToggleButtons();
@@ -42,22 +47,17 @@ function setUpToggleButtons() {
  */
 function callbackRender(results, status) {
 	if(status == google.maps.GeocoderStatus.OK) {
-		centerLocation = new Location(results[0].geometry.location);
-			// この緯度・経度が中心点となるので Location オブジェクトを生成する	
+		if(gmap == null) {
+			centerLocation = new Location(results[0].geometry.location);
+				// この緯度・経度が中心点となるので Location オブジェクトを生成する	
+			createGoogleMaps(results[0].geometry.location);
+		}
 
-		var options = {
-			zoom: 18,
-			center: results[0].geometry.location, // 指定の住所から計算した緯度経度を指定する
-			mapTypeId: google.maps.MapTypeId.ROADMAP // 「地図」で GoogleMap を出力する
-		};
-		var gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
-			// #map-canvas に GoogleMap を出力する
-
-		displayMarker(gmap, results[0].geometry.location);
+		displayMarker(results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
 			// GoogleMap 上で左クリックがあったら、、、
-			displayMarker(gmap, event.latLng);
+			displayMarker(event.latLng);
 				// その場所に Marker を立てる
 		});
 
@@ -66,13 +66,28 @@ function callbackRender(results, status) {
 }
 
 /**
+ * Map オブジェクトを生成して、画面に表示する。
+ * 
+ * @param  {Object} location 緯度経度を格納したオブジェクト
+ */
+function createGoogleMaps(location) {
+	var options = {
+		zoom: 18,
+		center: location, // 指定の住所から計算した緯度経度を指定する
+		mapTypeId: google.maps.MapTypeId.ROADMAP // 「地図」で GoogleMap を出力する
+	};
+	gmap = new google.maps.Map(document.getElementById('map-canvas'), options);
+		// #map-canvas に GoogleMap を出力する
+}
+
+/**
  * 指定の場所に InfoWindow を設定した Marker を表示する。
  * 
  * @param  {Object} map Marker を立てる GoogleMap オブジェクト
  * @param  {Object} location Marker を立てる位置
  */
-function displayMarker(map, location) {
-	var marker = new google.maps.Marker({map: map, position: location});
+function displayMarker(location) {
+	var marker = new google.maps.Marker({map: gmap, position: location});
 		// Marker オブジェクトを生成して、地図上に表示する
 
 	var markerInfoWindow = new MarkderInfoWindow(marker, new Location(location), centerLocation);
