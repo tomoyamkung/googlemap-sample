@@ -31,7 +31,8 @@ $(function() {
  */
 function setUpDeleteButton() {
 	$('#button-delete').click(function(event) {
-		alert('hoge');
+		stock.init();
+		board.init();
 	});
 }
 
