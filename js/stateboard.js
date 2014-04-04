@@ -91,6 +91,16 @@ var ToggleBoard = (function() {
 				result = hide;
 			} 
 			return result;
+		},
+		/**
+		 * トグルボタンの状態を初期化する。
+		 * 
+		 */
+		init: function() {
+			this.ne = show;
+			this.nw = show;
+			this.se = show;
+			this.sw = show;
 		}
 	};
 

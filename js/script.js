@@ -32,7 +32,8 @@ $(function() {
 function setUpDeleteButton() {
 	$('#button-delete').click(function(event) {
 		stock.init();
-		// board.init();
+		board.init();
+		// 画面に表示されているボタンも初期化する
 	});
 }
 
