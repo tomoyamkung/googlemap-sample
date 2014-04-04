@@ -32,7 +32,7 @@ $(function() {
 function setUpDeleteButton() {
 	$('#button-delete').click(function(event) {
 		stock.init();
-		board.init();
+		// board.init();
 	});
 }
 

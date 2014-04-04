@@ -62,6 +62,14 @@ var MarkderInfoWindow = (function() {
 			} else {
 				this.marker.setVisible(true); // Marker を表示する
 			}
+		},
+		/**
+		 * 保持している Marker と InfoWindow を削除する。
+		 * 
+		 */
+		delete: function() {
+			this.marker.setMap(null);
+			this.hideInfoWindow();
 		}
 	};
 
