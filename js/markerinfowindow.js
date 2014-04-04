@@ -69,7 +69,7 @@ var MarkderInfoWindow = (function() {
 		 */
 		delete: function() {
 			this.marker.setMap(null);
-			this.hideInfoWindow();
+			this.infoWindow.close();
 		}
 	};
 
