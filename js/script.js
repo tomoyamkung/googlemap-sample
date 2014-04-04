@@ -33,8 +33,16 @@ function setUpDeleteButton() {
 	$('#button-delete').click(function(event) {
 		stock.init();
 		board.init();
-		// 画面に表示されているボタンも初期化する
+		initToggleButtons();
 	});
+}
+
+/**
+ * トグルボタンの状態を初期化する。
+ * 
+ */
+function initToggleButtons() {
+	$('button[data-toggle]').removeClass('active');
 }
 
 /**
