@@ -10,12 +10,12 @@ $(function() {
 	// 初期表示
 	geocoder.geocode({'address': $('#address').val()}, callbackRender);
 
-	// 住所が入力された場合の対応
-	$('#address').change(function(event) {
-		var inputString = $(this).val();
+	// Marker ボタンがクリックされた場合の対応
+	$('#header-hollow button').click(function(event) {
+		var inputString = $('#address').val();
 		if(InputStringParser.isLatLng(inputString)) {
 			var array = inputString.split(":");
-			displayMarker(new google.maps.LatLng(array[0], array[1]));
+			showMaker(new google.maps.LatLng(array[0], array[1]));
 		} else {
 			geocoder.geocode({'address': inputString}, callbackRender);
 		}
@@ -53,11 +53,11 @@ function callbackRender(results, status) {
 			createGoogleMaps(results[0].geometry.location);
 		}
 
-		displayMarker(results[0].geometry.location);
+		showMaker(results[0].geometry.location);
 			// 初期値の住所から計算した緯度経度の位置に Marker を立てる
 		google.maps.event.addListener(gmap, 'click', function(event) {
 			// GoogleMap 上で左クリックがあったら、、、
-			displayMarker(event.latLng);
+			showMaker(event.latLng);
 				// その場所に Marker を立てる
 		});
 
@@ -86,7 +86,7 @@ function createGoogleMaps(location) {
  * @param  {Object} map Marker を立てる GoogleMap オブジェクト
  * @param  {Object} location Marker を立てる位置
  */
-function displayMarker(location) {
+function showMaker(location) {
 	var marker = new google.maps.Marker({map: gmap, position: location});
 		// Marker オブジェクトを生成して、地図上に表示する
 
