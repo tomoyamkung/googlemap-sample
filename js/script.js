@@ -22,7 +22,18 @@ $(function() {
 	});
 
 	setUpToggleButtons();
+	setUpDeleteButton();
 });
+
+/**
+ * 削除ボタンクリック時の処理を行う。
+ * 
+ */
+function setUpDeleteButton() {
+	$('#button-delete').click(function(event) {
+		alert('hoge');
+	});
+}
 
 /**
  * トグルボタンがクリックされたら ID 属性名称を取得して、`ToggleBoard#toggle` を実行する。
