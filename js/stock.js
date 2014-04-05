@@ -42,6 +42,16 @@ var Stock = (function() {
 			this.array.forEach(function(element, i) {
 				element.toggle(toggleBoard);
 			});
+		},
+		/**
+		 * 格納している MarkerInfoWindow を削除する。
+		 * 
+		 */
+		init: function() {
+			this.array.forEach(function(element, i) {
+				element.delete();
+			});
+			this.array = [];
 		}
 	};
 
