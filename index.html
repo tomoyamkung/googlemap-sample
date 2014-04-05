@@ -39,7 +39,7 @@
 							<button id="sw" type="button" class="btn btn-default" data-toggle="button">南西エリア</button>
 						</div>
 						<div class="col-md-1">
-							<button type="button" id="button-delete" class="btn btn-warning">DELETE</button>
+							<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-delete">DELETE</button>
 						</div>
 					</div>
 					<div class="row">
@@ -104,6 +104,30 @@
 			</footer>
 
 		</div><!-- /.container -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="modalLabel">すべての Marker を削除しますか？</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-warning">
+							<p>
+								Marker を削除するとデータの復元はできません。
+								本当に削除してもよろしいですか？
+							</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+						<button type="button" id="button-delete" class="btn btn-primary" data-dismiss="modal">削除</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- /#modal-delete -->
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
