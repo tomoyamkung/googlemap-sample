@@ -10,9 +10,20 @@ var InputStringParser = (function() {
 		 * 
 		 * @param  {String}  input 入力された文字列
 		 * @return {Boolean}       緯度・経度の場合 true
+		 * @throws {SyntaxError} コロンが複数ある場合
 		 */
 		isLatLng: function(input) {
-			return 0 < input.indexOf(":");
+			var indexOf = input.indexOf(":");
+			if(indexOf <= 0) {
+				return false;
+			}
+
+			var count = input.split(":").length;
+			if(count != 2) {
+				console.log('?');
+				throw new SyntaxError("緯度・経度指定の書式が異なります。");
+			}
+			return true;
 		}
 	};
 })();
