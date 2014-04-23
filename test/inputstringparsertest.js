@@ -11,12 +11,12 @@ test('名称を入力した場合', 1, function() {
 
 module('コロンが複数ある場合', { });
 test('コロンが2つある場合', 1, function() {
-  // throws(InputStringParser.isLatLng("10:10:10"), SyntaxError);
+  // throws(InputStringParser.isLatLng("10:10:10"), "緯度・経度指定の書式が異なります。");
   // ↑ のように書けるはずなのだが、なぜか失敗してしまう。。。
   try {
-  	InputStringParser.isLatLng("10:10:10");
-  	ok(false, "例外が投げられるのでここには来ない");
+    InputStringParser.isLatLng("10:10:10");
+    ok(false, "例外が投げられるのでここには来ない");
   } catch(e) {
-  	strictEqual(e.message, "緯度・経度指定の書式が異なります。");
+    strictEqual(e.message, "緯度・経度指定の書式が異なります。");
   }
 });

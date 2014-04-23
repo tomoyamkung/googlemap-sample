@@ -20,8 +20,7 @@ var InputStringParser = (function() {
 
 			var count = input.split(":").length;
 			if(count != 2) {
-				console.log('?');
-				throw new SyntaxError("緯度・経度指定の書式が異なります。");
+				throw new InputStringParserException();
 			}
 			return true;
 		}
