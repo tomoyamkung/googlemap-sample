@@ -12,18 +12,46 @@ $(function() {
 
 	// Marker ボタンがクリックされた場合の対応
 	$('#header-hollow button').click(function(event) {
+		removeInputStringErrorMessage();
 		var inputString = $('#address').val();
-		if(InputStringParser.isLatLng(inputString)) {
-			var array = inputString.split(":");
-			showMaker(new google.maps.LatLng(array[0], array[1]));
-		} else {
-			geocoder.geocode({'address': inputString}, callbackRender);
+		try {
+			if(InputStringParser.isLatLng(inputString)) {
+				var array = inputString.split(":");
+				showMaker(new google.maps.LatLng(array[0], array[1]));
+			} else {
+				geocoder.geocode({'address': inputString}, callbackRender);
+			}
+		} catch(e) {
+			showInputStringErrorMessage(e.message);
 		}
 	});
 
 	setUpToggleButtons();
 	setUpDeleteButton();
 });
+
+/**
+ * 入力フォーマットに誤りがあった場合のエラーメッセージを取り除く。
+ * 
+ */
+function removeInputStringErrorMessage () {
+	$('#error-message').remove();
+}
+
+/**
+ * 緯度・経度の入力フォーマットに誤りがあった場合にエラーメッセージを表示する。
+ * 
+ * @param  {String} message エラーメッセージ
+ */
+function showInputStringErrorMessage(message) {
+	removeInputStringErrorMessage();
+
+	var template = _.template($('#error_message_template').text());
+	var tag = template({
+		message: message
+	});
+	$("#inputtextform").append(tag);
+}
 
 /**
  * 削除ボタンクリック時の処理を行う。
