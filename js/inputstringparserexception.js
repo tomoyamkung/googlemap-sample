@@ -3,10 +3,10 @@
  * 
  * @param {String} message 例外エラーメッセージ
  */
-function InputStringParserException(message) {
+var InputStringParserException = function(message) {
 	this.name = "inputstringparser";
 	this.message = message || "緯度・経度指定の書式が異なります。";
-}
+};
 
 InputStringParserException.prototype = new Error();
 InputStringParserException.prototype.constructor = InputStringParserException;
