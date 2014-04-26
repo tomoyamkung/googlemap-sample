@@ -6,6 +6,47 @@ googlemap-sample
 
 ## v0.7.1
 
+### grunt-jsbeautifier を導入しました
+
+[JavaScript beautifier](http://jsbeautifier.org/) の Grunt 版である [grunt-jsbeautifier](https://www.npmjs.org/package/grunt-jsbeautifier) を導入しました。
+
+grunt-jsbeautifier は JavaScript, JSON, CSS, HTML ファイルをフォーマットしてくれるプラグインです。
+フォーマットするルールはオプションで設定できますが、本プロジェクトではデフォルトのルールで運用していきます。
+
+
+#### インストール
+
+インストールは簡単です。
+
+1. `npm` コマンドのパスが通っているターミナルで本プロジェクトに移動する
+2. 次のコマンドを実行する
+	- `$ npm install grunt-jsbeautifier --save-dev`
+
+
+#### 設定
+
+grunt-jsbeautifier の設定は、他のプラグインと同様に Gruntfile.js で行います。
+
+設定内容は次の通りです。
+
+```js
+// grunt-jsbeautifier の設定
+jsbeautifier: {
+    files: ["js/**/*.js", "test/**/*.js", "css/**/*.css", "*.html"],
+    option: {}
+}
+```
+
+
+#### 実行方法
+
+次のコマンドで grunt-jsbeautifier によるフォーマットが実行されます。
+
+```sh
+$ grunt jsbeautifier
+```
+
+
 ### 緯度・経度の入力フォーマットに誤りがある場合にエラーメッセージを表示するようにしました
 
 コロンが複数付いている場合にエラーメッセージを表示するようにしました。

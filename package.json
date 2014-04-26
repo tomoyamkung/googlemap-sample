@@ -5,6 +5,7 @@
     "grunt": "0.4.3",
     "grunt-contrib-connect": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-qunit": "^0.4.0"
+    "grunt-contrib-qunit": "^0.4.0",
+    "grunt-jsbeautifier": "^0.2.7"
   }
 }

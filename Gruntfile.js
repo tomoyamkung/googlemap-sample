@@ -35,6 +35,12 @@ module.exports = function(grunt) {
         // grunt-contrib-qunit の設定
         qunit: {
             all: ['test/**/*.html'] // test ディレクトリにある HTML を実行対象とする
+        },
+
+        // grunt-jsbeautifier の設定
+        jsbeautifier: {
+            files: ["js/**/*.js", "test/**/*.js", "css/**/*.css", "*.html"],
+            option: {}
         }
     });
 
@@ -43,6 +49,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     // grunt-contrib-qunit を有効にするためのタスクをロードする
     grunt.loadNpmTasks('grunt-contrib-qunit');
+    // grunt-jsbeautifier を有効にするためのタスクをロードする
+    grunt.loadNpmTasks('grunt-jsbeautifier');
 
     // `grunt` コマンドで実行するデフォルトタスクを定義する
     grunt.registerTask('default', ['connect:live', 'watch:live']);
