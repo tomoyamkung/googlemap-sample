@@ -1,93 +1,96 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset=utf8>
-		<title>Google Map サンプル v0.7.2</title>
-		<meta name="description" content="入力した住所から緯度・経度を GoogleMap の InfoWindow に表示するだけの簡単なプログラムです。">
 
-		<!-- CSS -->
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<head>
+    <meta charset=utf8>
+    <title>Google Map サンプル v0.7.2</title>
+    <meta name="description" content="入力した住所から緯度・経度を GoogleMap の InfoWindow に表示するだけの簡単なプログラムです。">
 
-		<link rel="stylesheet" type="text/css" href="./css/style.css" />
-	</head>
-	<body>
-		<div class="container">
-			<div id="header-hollow" class="row">
-				<div id="inputtextform" class="col-md-6">
-					<div class="input-group">
-						<span class="input-group-addon">
+    <!-- CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div id="header-hollow" class="row">
+            <div id="inputtextform" class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">
+
 							<span class="glyphicon glyphicon-map-marker"></span>
-						</span>
-						<input type="text" id="address" class="form-control" value="東京都墨田区押上１−１−２" />
-					</div>
-				</div>
-				<div class="col-md-1">
-					<button type="button" class="btn btn-primary">Marker</button>
-				</div>
-			</div><!-- /#header-hollow -->
+                    </span>
+                    <input type="text" id="address" class="form-control" value="東京都墨田区押上１−１−２" />
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary">Marker</button>
+            </div>
+        </div>
+        <!-- /#header-hollow -->
 
-			<div class="row">
-				<div id="main" class="col-md-9">
-					<div id="area-button" class="row text-center">
-						<div class="col-md-8">
-							<button id="ne" type="button" class="btn btn-default" data-toggle="button">北東エリア</button>
-							<button id="nw" type="button" class="btn btn-default" data-toggle="button">北西エリア</button>
-							<button id="se" type="button" class="btn btn-default" data-toggle="button">南東エリア</button>
-							<button id="sw" type="button" class="btn btn-default" data-toggle="button">南西エリア</button>
-						</div>
-						<div class="col-md-1">
-							<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-delete">DELETE</button>
-						</div>
-					</div>
-					<div class="row">
-						<div class="well well-sm">
-							<div id="map-canvas"></div>
-						</div>
-					</div>
-				</div>
-				<div id="right-side" class="col-md-3">
-					<div class="google-adsense">
-						<div class="label-ad">
-							<span>広告</span>
-						</div>
-						<div class="adsense">
-							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- http://labo.tomoyamkung.net/googlemap-sample -->
-							<ins class="adsbygoogle"
-							     style="display:inline-block;width:300px;height:250px"
-							     data-ad-client="ca-pub-2526249159485393"
-							     data-ad-slot="3872567544"></ins>
-							<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
-						</div>
-						<div class="adsense">
-							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- http://labo.tomoyamkung.net/googlemap-sample -->
-							<ins class="adsbygoogle"
-							     style="display:inline-block;width:300px;height:250px"
-							     data-ad-client="ca-pub-2526249159485393"
-							     data-ad-slot="3872567544"></ins>
-							<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
-						</div>
-					</div><!-- /.google-adsense-->
+        <div class="row">
+            <div id="main" class="col-md-9">
+                <div id="area-button" class="row text-center">
+                    <div class="col-md-8">
+                        <button id="ne" type="button" class="btn btn-default" data-toggle="button">北東エリア</button>
+                        <button id="nw" type="button" class="btn btn-default" data-toggle="button">北西エリア</button>
+                        <button id="se" type="button" class="btn btn-default" data-toggle="button">南東エリア</button>
+                        <button id="sw" type="button" class="btn btn-default" data-toggle="button">南西エリア</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-delete">DELETE</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="well well-sm">
+                        <div id="map-canvas"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="right-side" class="col-md-3">
+                <div class="google-adsense">
+                    <div class="label-ad">
+                        <span>広告</span>
+                    </div>
+                    <div class="adsense">
+                        <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- http://labo.tomoyamkung.net/googlemap-sample -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-2526249159485393" data-ad-slot="3872567544"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <div class="adsense">
+                        <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- http://labo.tomoyamkung.net/googlemap-sample -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-2526249159485393" data-ad-slot="3872567544"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+                <!-- /.google-adsense-->
 
-					<div class="amazon">
-						<div class="label-ad">
-							<span>GoogleMaps 関連本</span>
-						</div>
-						<span class="amazon-book">
+                <div class="amazon">
+                    <div class="label-ad">
+                        <span>GoogleMaps 関連本</span>
+                    </div>
+                    <span class="amazon-book">
+
 							<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?t=selfmemo0d-22&o=9&p=8&l=as1&asins=B00IIUBED6&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
 						</span>
-						<span class="amazon-book">
+                    <span class="amazon-book">
+
 							<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?t=selfmemo0d-22&o=9&p=8&l=as1&asins=4048865382&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
 						</span>
-						<!--
+                    <!--
 						<span class="amazon-book">
 							<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?t=selfmemo0d-22&o=9&p=8&l=as1&asins=4844331167&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
 						</span>
@@ -95,66 +98,64 @@
 							<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?t=selfmemo0d-22&o=9&p=8&l=as1&asins=4873113415&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
 						</span>
 						-->
-					</div>
-				</div><!-- /#right-side -->
-			</div>
+                </div>
+            </div>
+            <!-- /#right-side -->
+        </div>
 
-			<footer>
-				<span>Copyright &copy; 2014 <a href="http://tomoyamkung.net">tomoyamkung.net</a> All Rights Reserved.</span>
-			</footer>
+        <footer>
+            <span>Copyright &copy; 2014 <a href="http://tomoyamkung.net">tomoyamkung.net</a> All Rights Reserved.</span>
+        </footer>
 
-		</div><!-- /.container -->
+    </div>
+    <!-- /.container -->
 
-		<!-- Modal -->
-		<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="modalLabel">すべての Marker を削除しますか？</h4>
-					</div>
-					<div class="modal-body">
-						<div class="alert alert-warning">
-							<p>
-								Marker を削除するとデータの復元はできません。
-								本当に削除してもよろしいですか？
-							</p>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-						<button type="button" id="button-delete" class="btn btn-primary" data-dismiss="modal">削除</button>
-					</div>
-				</div>
-			</div>
-		</div><!-- /#modal-delete -->
+    <!-- Modal -->
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalLabel">すべての Marker を削除しますか？</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <p>
+                            Marker を削除するとデータの復元はできません。 本当に削除してもよろしいですか？
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                    <button type="button" id="button-delete" class="btn btn-primary" data-dismiss="modal">削除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#modal-delete -->
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-		<script type="text/javascript" src="./js/inputstringparserexception.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/inputstringparser.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/stock.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/location.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/locationsort.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/markerinfowindow.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/stateboard.js" charset="utf8"></script>
-		<script type="text/javascript" src="./js/script.js" charset="utf8"></script>
-		<script type="text/template" id="infowindow_template">
-			<div class="well info-window">
-				<div class="row">
-					<span>緯度:&nbsp;<%= latitude %></span>
-				</div>
-				<div class="row">
-					<span>経度:&nbsp;<%= longitude %></span>
-				</div>
-			</div>
-		</script>
-		<script type="text/template" id="error_message_template">
-			<div id="error-message" class="alert alert-warning">
-				<p><%= message %></p>
-			</div>
-		</script>
-	</body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <script type="text/javascript" src="./js/inputstringparserexception.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/inputstringparser.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/stock.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/location.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/locationsort.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/markerinfowindow.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/stateboard.js" charset="utf8"></script>
+    <script type="text/javascript" src="./js/script.js" charset="utf8"></script>
+    <script type="text/template" id="infowindow_template">
+        < div class = "well info-window" > < div class = "row" > < span > 緯度: & nbsp; <%= latitude %> < /span>
+				</div > < div class = "row" > < span > 経度: & nbsp; <%= longitude %> < /span>
+				</div > < /div>
+    </script>
+    <script type="text/template" id="error_message_template">
+        < div id = "error-message"
+        class = "alert alert-warning" > < p > <%= message %> < /p>
+			</div >
+    </script>
+</body>
+
 </html>
