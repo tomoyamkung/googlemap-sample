@@ -6,6 +6,15 @@ googlemap-sample
 
 ## v0.7.1
 
+
+### 入力内容を削除する Clear ボタンを設置しました
+
+Clear を削除するボタンを設置しました。
+クリックすると、住所などを入力するテキストの文字列が消えます。
+
+削除確認のダイアログなどは表示されないのでご注意ください。
+
+
 ### grunt-jsbeautifier を導入しました
 
 [JavaScript beautifier](http://jsbeautifier.org/) の Grunt 版である [grunt-jsbeautifier](https://www.npmjs.org/package/grunt-jsbeautifier) を導入しました。

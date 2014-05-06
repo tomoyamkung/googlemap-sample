@@ -12,7 +12,7 @@ $(function() {
     }, callbackRender);
 
     // Marker ボタンがクリックされた場合の対応
-    $('#header-hollow button').click(function(event) {
+    $('#marker').click(function(event) {
         removeInputStringErrorMessage();
         var inputString = $('#address').val();
         try {
@@ -29,9 +29,22 @@ $(function() {
         }
     });
 
+    // Clear ボタンがクリックされた場合の対応
+    $('#clear').click(function(event) {
+        clearAddress();
+    });
+
     setUpToggleButtons();
     setUpDeleteButton();
 });
+
+/**
+ * 入力欄の文字列をクリアする。
+ *
+ */
+function clearAddress() {
+    $('#address').val('');
+}
 
 /**
  * 入力フォーマットに誤りがあった場合のエラーメッセージを取り除く。
