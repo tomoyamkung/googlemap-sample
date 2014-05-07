@@ -148,14 +148,19 @@
     <script type="text/javascript" src="./js/stateboard.js" charset="utf8"></script>
     <script type="text/javascript" src="./js/script.js" charset="utf8"></script>
     <script type="text/template" id="infowindow_template">
-        < div class = "well info-window" > < div class = "row" > < span > 緯度: & nbsp; <%= latitude %> < /span>
-				</div > < div class = "row" > < span > 経度: & nbsp; <%= longitude %> < /span>
-				</div > < /div>
+        <div class="well info-window">
+            <div class="row">
+                <span>緯度:&nbsp;<%= latitude %></span>
+			</div>
+            <div class="row">
+                <span>経度:&nbsp;<%= longitude %></span>
+			</div>
+        </div>
     </script>
     <script type="text/template" id="error_message_template">
-        < div id = "error-message"
-        class = "alert alert-warning" > < p > <%= message %> < /p>
-			</div >
+        <div id="error-message" class="alert alert-warning">
+            <p><%= message %></p>
+		</div>
     </script>
 </body>
 

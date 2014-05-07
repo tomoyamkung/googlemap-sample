@@ -41,7 +41,7 @@ grunt-jsbeautifier の設定は、他のプラグインと同様に Gruntfile.js
 ```js
 // grunt-jsbeautifier の設定
 jsbeautifier: {
-    files: ["js/**/*.js", "test/**/*.js", "css/**/*.css", "*.html"],
+    files: ["js/**/*.js", "test/**/*.js", "css/**/*.css"],
     option: {}
 }
 ```
